@@ -9,6 +9,7 @@ enum EnemyType {
 
 @export var enemy_type: EnemyType = EnemyType.Weak
 @export var sprite: AnimatedSprite2D
+@export var marker: Marker2D
 
 
 var life: int
@@ -33,7 +34,7 @@ func _ready() -> void:
 	sprite.modulate = color
 
 
-func take_damage(value: int):
+func take_damage(value: int) -> void:
 	life -= value
 	if life <= 0:
 		queue_free()
@@ -45,3 +46,7 @@ func take_damage(value: int):
 	hit_tween = create_tween()
 	sprite.modulate.a = 0.3
 	hit_tween.tween_property(sprite, "modulate:a", 1.0, 0.2)
+
+
+func get_bomb_position() -> Vector2:
+	return marker.global_position

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b217btv0jfif"]
+
+[ext_resource type="Script" uid="uid://dapg16qqhn78n" path="res://scripts/bomb_manager.gd" id="1_ntoen"]
+[ext_resource type="PackedScene" uid="uid://0ui1nc183yn3" path="res://scenes/bomb.tscn" id="2_tovtn"]
+
+[node name="BombManager" type="Node2D" unique_id=2063267193]
+script = ExtResource("1_ntoen")
+bomb_scene = ExtResource("2_tovtn")
