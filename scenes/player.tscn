@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://008kmsqhoftq"]
+
+[ext_resource type="Texture2D" uid="uid://dneyhw0r0db2d" path="res://assets/sheet01.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://cbyyq1pioed8r" path="res://scripts/player.gd" id="1_g2els"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0myyo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2els")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}],
+"loop": 1,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" unique_id=1460996354 node_paths=PackedStringArray("sprite", "marker_2d")]
+collision_mask = 0
+script = ExtResource("1_g2els")
+sprite = NodePath("AnimatedSprite2D")
+marker_2d = NodePath("Marker2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1010757930]
+sprite_frames = SubResource("SpriteFrames_0myyo")
+animation = &"idle"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=462036016]
+position = Vector2(4.804494, -12.844028)
+scale = Vector2(2.2578125, 1.4765625)
+polygon = PackedVector2Array(-4.7853813, 4.6351094, -3.8995686, 0.5716171, -0.35631573, 0.5716171, 0.5294974, 4.6351094, 0.5294974, 8.698602, 4.07275, 11.407597, 4.07275, 16.825586, -0.35631573, 16.825586, -2.127942, 18.180084, -3.8995686, 16.825586, -8.328634, 16.825586, -8.328634, 11.407597, -4.7853813, 8.698602)
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1612976516]
+position = Vector2(0, -16)

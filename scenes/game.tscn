@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c2ymriv0wvfqi"]
+
+[ext_resource type="Script" uid="uid://c1w7prvvxytom" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://ca3wcvsoih4ta" path="res://scenes/bullet_manager.tscn" id="3_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://008kmsqhoftq" path="res://scenes/player.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://bfcwpjp0h3o6d" path="res://scenes/bullet.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://dgi3fd33gqq6f" path="res://scenes/enemy_manager.tscn" id="5_iywne"]
+
+[node name="Game" type="Node" unique_id=949139678]
+script = ExtResource("1_yqjtg")
+
+[node name="Player" parent="." unique_id=1460996354 node_paths=PackedStringArray("bulletManager") instance=ExtResource("3_lnu2h")]
+position = Vector2(341, 329)
+bulletManager = NodePath("../BulletManager")
+
+[node name="BulletManager" parent="." unique_id=279609402 instance=ExtResource("3_lbhrr")]
+bullet_scene = ExtResource("4_lbhrr")
+
+[node name="EnemyManager" parent="." unique_id=1136709635 instance=ExtResource("5_iywne")]
