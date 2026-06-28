@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://bmk823btowp5e"]
+
+[ext_resource type="Script" uid="uid://b8cagoo5oxtev" path="res://scripts/pause_screen.gd" id="1_gchx3"]
+[ext_resource type="PackedScene" uid="uid://8tyby2vygod4" path="res://scenes/vignette.tscn" id="2_qeunj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hr2n2"]
+bg_color = Color(0.1, 0.1, 0.1, 0.78431374)
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.99215686, 0.43529412, 0, 0.627451)
+
+[node name="PauseScreen" type="CanvasLayer" unique_id=1308109112 node_paths=PackedStringArray("button_resume")]
+process_mode = 2
+script = ExtResource("1_gchx3")
+button_resume = NodePath("MarginContainer/VBoxContainer/ButtonResume")
+
+[node name="Vignette" parent="." unique_id=1431719666 instance=ExtResource("2_qeunj")]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=211786783]
+custom_minimum_size = Vector2(0, 64)
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+theme_override_font_sizes/mono_font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_hr2n2")
+bbcode_enabled = true
+text = "[center][color=yellow]Paused[/color]"
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=338043003]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=621064227]
+layout_mode = 2
+
+[node name="ButtonResume" type="Button" parent="MarginContainer/VBoxContainer" unique_id=448079108]
+layout_mode = 2
+text = "Resume"
+
+[node name="ButtonRestart" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1049896389]
+layout_mode = 2
+text = "Restart"
+
+[node name="ButtonQuit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1115328238]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonResume" to="." method="_on_button_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonRestart" to="." method="_on_button_restart_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonQuit" to="." method="_on_button_quit_pressed"]

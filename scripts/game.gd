@@ -5,6 +5,7 @@ const PLAYER = preload("uid://008kmsqhoftq")
 const EXPLOSION = preload("uid://bs4w2if84ps2x")
 const VICTORY_SCREEN = preload("uid://btdffvpcv8u3l")
 const DEFEAT_SCREEN = preload("uid://cwgfegkjdyvcy")
+const PAUSE_SCREEN = preload("uid://bmk823btowp5e")
 
 @export var ship_anchor: Node2D
 @export var bullet_manager: BulletManager
@@ -49,8 +50,10 @@ func _spawn_player(is_invincible: bool) -> void:
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	#if event.is_action_pressed("ui_cancel"):
-	#	get_tree().quit()
+	if event.is_action_pressed("ui_cancel"):
+		var pause_screen: PauseScreen = PAUSE_SCREEN.instantiate() as PauseScreen
+		add_child(pause_screen)
+		get_tree().root.set_input_as_handled()
 	if played_died and event.is_action_pressed("ui_accept"):
 		ui.toggle_message(false)
 		_spawn_player(true)

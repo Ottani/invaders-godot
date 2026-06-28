@@ -5,7 +5,7 @@
 - [x] Find a better font
 - [x] Victory Screen
 - [x] Defeat Screen
-- [ ] Pause Screen
+- [x] Pause Screen
 - [ ] Rocks
 - [ ] Destructible Rocks by bombs and bullets
 - [ ] Destructible Rocks by enemy contact
