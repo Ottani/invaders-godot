@@ -21,11 +21,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Godot Web Export
-        uses: firebelley/godot-export@v5
+        uses: firebelley/godot-export@v8
         with:
-          godot_version: "4.7"
-          export_preset: "Web"
+          godot_executable_download_url: "https://downloads.godotengine.org/?version=4.7&flavor=stable&slug=linux.x86_64.zip&platform=linux.64"
+          godot_export_templates_download_url: "https://downloads.godotengine.org/?version=4.7&flavor=stable&slug=export_templates.tpz&platform=templates"
+          presets_to_export: "Web"
           relative_project_path: "./"
+          relative_export_path: "build/web"
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
