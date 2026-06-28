@@ -11,9 +11,11 @@ enum EnemyType {
 @export var sprite: AnimatedSprite2D
 @export var marker: Marker2D
 
+signal destroyed(points: int)
 
 var life: int
 var color: Color
+var points: int
 var hit_tween: Tween
 
 
@@ -32,11 +34,13 @@ func _ready() -> void:
 			life = 6
 			color = Color.RED
 	sprite.modulate = color
+	points = life * 10
 
 
 func take_damage(value: int) -> void:
 	life -= value
 	if life <= 0:
+		destroyed.emit(points)
 		queue_free()
 		return
 	

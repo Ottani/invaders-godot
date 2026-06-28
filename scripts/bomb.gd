@@ -17,4 +17,9 @@ func _physics_process(delta: float) -> void:
 	position += DIRECTION * speed * delta
 	if position.y > screen_size.y:
 		queue_free()
-	
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is Player:
+		(body as Player).take_damage(1)
+	queue_free()

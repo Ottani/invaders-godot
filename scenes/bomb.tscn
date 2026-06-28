@@ -50,7 +50,9 @@ script = ExtResource("1_vpdcx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1163995679]
 sprite_frames = SubResource("SpriteFrames_0myyo")
 autoplay = "default"
-frame_progress = 0.6432478
+frame_progress = 0.010868123
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1637684042]
 shape = SubResource("CircleShape2D_0myyo")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

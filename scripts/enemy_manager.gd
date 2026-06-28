@@ -17,6 +17,8 @@ var direction: float = 1.0
 var screen_size: Vector2
 var enemy_shoot_delay: float = 0.0
 
+signal enemy_killed(points: int)
+
 
 func _init() -> void:
 	for y in ROWS:
@@ -31,6 +33,7 @@ func _init() -> void:
 			var enemy: Enemy = ENEMY.instantiate() as Enemy
 			enemy.enemy_type = enemy_type
 			enemy.position = enemy_position
+			enemy.destroyed.connect(_on_enemy_destroyed)
 			add_child(enemy)
 
 
@@ -69,7 +72,7 @@ func _physics_process(delta: float) -> void:
 	if enemy_shoot_delay > ENEMY_SHOOT_DELAY:
 		enemy_shoot_delay = 0.0
 		_shoot(enemies)
-	
+
 
 func _shoot(enemies: Array[Enemy]) -> void:
 	if not bomb_manager:
@@ -82,4 +85,15 @@ func _shoot(enemies: Array[Enemy]) -> void:
 	for i in range(qty_shooters):
 		var shooter: Enemy = enemies[i]
 		bomb_manager.spawn_bomb(shooter.get_bomb_position())
-	
+
+
+func _on_enemy_destroyed(points: int) -> void:
+	enemy_killed.emit(points)
+
+
+func freeze_enemies() -> void:
+	set_physics_process(false)
+
+
+func unfreeze_enemies() -> void:
+	set_physics_process(true)

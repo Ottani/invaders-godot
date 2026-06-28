@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cqxrhclqdmc7m"]
+
+[ext_resource type="Texture2D" uid="uid://dneyhw0r0db2d" path="res://assets/sheet01.png" id="1_tf86k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0myyo"]
+atlas = ExtResource("1_tf86k")
+region = Rect2(16, 80, 16, 16)
+
+[node name="Life" type="TextureRect" unique_id=2043129759]
+texture = SubResource("AtlasTexture_0myyo")

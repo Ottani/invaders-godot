@@ -1,12 +1,18 @@
 [gd_scene format=3 uid="uid://b0jem2xwiwq0x"]
 
 [ext_resource type="Texture2D" uid="uid://dneyhw0r0db2d" path="res://assets/sheet01.png" id="1_nt7q6"]
+[ext_resource type="Script" uid="uid://dsh054nhjs8iq" path="res://scripts/ui.gd" id="1_x4jx1"]
+[ext_resource type="PackedScene" uid="uid://cqxrhclqdmc7m" path="res://scenes/life.tscn" id="2_yev5y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0myyo"]
 atlas = ExtResource("1_nt7q6")
 region = Rect2(16, 80, 16, 16)
 
-[node name="UI" type="CanvasLayer" unique_id=983623857]
+[node name="UI" type="CanvasLayer" unique_id=983623857 node_paths=PackedStringArray("continue_message", "lives_container", "score_label")]
+script = ExtResource("1_x4jx1")
+continue_message = NodePath("MarginContainer/ContinueMessage")
+lives_container = NodePath("MarginContainer/HBoxContainer/LivesContainer")
+score_label = NodePath("MarginContainer/HBoxContainer/ScoreLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=607164612]
 anchors_preset = 15
@@ -24,20 +30,28 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=483585878]
+[node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=483585878]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Points: 012301"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1549140930]
+[node name="LivesContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1549140930]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=650838901]
+[node name="Life" parent="MarginContainer/HBoxContainer/LivesContainer" unique_id=2043129759 instance=ExtResource("2_yev5y")]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer/LivesContainer" unique_id=1732335467]
 layout_mode = 2
 texture = SubResource("AtlasTexture_0myyo")
 
-[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=1732335467]
+[node name="ContinueMessage" type="RichTextLabel" parent="MarginContainer" unique_id=1789404091]
 layout_mode = 2
-texture = SubResource("AtlasTexture_0myyo")
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "Press [color=yellow][wave amp=15 freq=5]Spacebar[/wave][/color] to continue"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
