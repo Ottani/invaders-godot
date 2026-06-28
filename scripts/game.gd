@@ -3,6 +3,7 @@ class_name Game extends Node
 
 const PLAYER = preload("uid://008kmsqhoftq")
 const EXPLOSION = preload("uid://bs4w2if84ps2x")
+const VICTORY_SCREEN = preload("uid://btdffvpcv8u3l")
 
 @export var ship_anchor: Node2D
 @export var bullet_manager: BulletManager
@@ -23,6 +24,7 @@ func _ready() -> void:
 	score = 0
 	ui.set_score(score)
 	enemy_manager.enemy_killed.connect(_on_enemy_killed)
+	enemy_manager.all_enemies_killed.connect(_on_all_enemies_killed)
 
 
 func _spawn_player(is_invincible: bool) -> void:
@@ -46,8 +48,8 @@ func _spawn_player(is_invincible: bool) -> void:
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
-		get_tree().quit()
+	#if event.is_action_pressed("ui_cancel"):
+	#	get_tree().quit()
 	if played_died and event.is_action_pressed("ui_accept"):
 		ui.toggle_message(false)
 		_spawn_player(true)
@@ -72,3 +74,8 @@ func _on_player_died(position: Vector2) -> void:
 func _on_enemy_killed(points: int) -> void:
 	score += points
 	ui.set_score(score)
+
+
+func _on_all_enemies_killed() -> void:
+	var victory_screen: VictoryScreen = VICTORY_SCREEN.instantiate() as VictoryScreen
+	add_child(victory_screen)

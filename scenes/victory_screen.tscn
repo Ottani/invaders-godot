@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://btdffvpcv8u3l"]
+
+[ext_resource type="Shader" uid="uid://bk5nqsl4dy4em" path="res://shaders/vignette.gdshader" id="1_ujlt3"]
+[ext_resource type="Script" uid="uid://cxxe1ok533vym" path="res://scripts/victory_screen.gd" id="1_wdgif"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0myyo"]
+shader = ExtResource("1_ujlt3")
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+
+[node name="VictoryScreen" type="CanvasLayer" unique_id=1786491933 node_paths=PackedStringArray("button_restart")]
+process_mode = 2
+script = ExtResource("1_wdgif")
+button_restart = NodePath("MarginContainer/VBoxContainer/ButtonRestart")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1024523087]
+material = SubResource("ShaderMaterial_0myyo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1103711182]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+theme_override_font_sizes/mono_font_size = 16
+bbcode_enabled = true
+text = "[center][color=green]Victory![/color]
+
+You defeated all the aliens![/center]"
+fit_content = true
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=177393174]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1549781379]
+layout_mode = 2
+
+[node name="ButtonRestart" type="Button" parent="MarginContainer/VBoxContainer" unique_id=215253812]
+layout_mode = 2
+text = "Restart"
+
+[node name="ButtonQuit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1277935712]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonRestart" to="." method="_on_button_restart_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonQuit" to="." method="_on_button_quit_pressed"]

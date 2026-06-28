@@ -12,7 +12,7 @@ func _ready() -> void:
 	_on_change_scene(Scene.MAIN)
 
 
-func _on_change_scene(new_scene: Scene):
+func _on_change_scene(new_scene: Scene) -> void:
 	if current_scene:
 		if current_scene.has_signal("change_scene") and current_scene.change_scene.is_connected(_on_change_scene):
 			current_scene.change_scene.disconnect(_on_change_scene)

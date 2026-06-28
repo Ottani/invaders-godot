@@ -16,8 +16,10 @@ const MAX_SHOOTERS: int = 6
 var direction: float = 1.0
 var screen_size: Vector2
 var enemy_shoot_delay: float = 0.0
+var qty_enemies: int = 0
 
 signal enemy_killed(points: int)
+signal all_enemies_killed
 
 
 func _init() -> void:
@@ -35,6 +37,7 @@ func _init() -> void:
 			enemy.position = enemy_position
 			enemy.destroyed.connect(_on_enemy_destroyed)
 			add_child(enemy)
+	qty_enemies = ROWS * COLS
 
 
 func _ready() -> void:
@@ -88,7 +91,10 @@ func _shoot(enemies: Array[Enemy]) -> void:
 
 
 func _on_enemy_destroyed(points: int) -> void:
+	qty_enemies -= 1
 	enemy_killed.emit(points)
+	if qty_enemies <= 0:
+		all_enemies_killed.emit()
 
 
 func freeze_enemies() -> void:
