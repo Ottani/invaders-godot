@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://008kmsqhoftq" path="res://scenes/player.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://dgi3fd33gqq6f" path="res://scenes/enemy_manager.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://b217btv0jfif" path="res://scenes/bomb_manager.tscn" id="5_p57ef"]
+[ext_resource type="PackedScene" uid="uid://b0jem2xwiwq0x" path="res://scenes/ui.tscn" id="6_p57ef"]
 
 [node name="Game" type="Node" unique_id=949139678]
 script = ExtResource("1_yqjtg")
@@ -19,3 +20,5 @@ bulletManager = NodePath("../BulletManager")
 
 [node name="EnemyManager" parent="." unique_id=1136709635 node_paths=PackedStringArray("bomb_manager") instance=ExtResource("5_iywne")]
 bomb_manager = NodePath("../BombManager")
+
+[node name="UI" parent="." unique_id=983623857 instance=ExtResource("6_p57ef")]
