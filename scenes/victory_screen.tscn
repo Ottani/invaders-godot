@@ -1,26 +1,14 @@
 [gd_scene format=3 uid="uid://btdffvpcv8u3l"]
 
-[ext_resource type="Shader" uid="uid://bk5nqsl4dy4em" path="res://shaders/vignette.gdshader" id="1_ujlt3"]
 [ext_resource type="Script" uid="uid://cxxe1ok533vym" path="res://scripts/victory_screen.gd" id="1_wdgif"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0myyo"]
-shader = ExtResource("1_ujlt3")
-shader_parameter/vignette_intensity = 0.4
-shader_parameter/vignette_opacity = 0.5
-shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+[ext_resource type="PackedScene" uid="uid://8tyby2vygod4" path="res://scenes/vignette.tscn" id="2_wdgif"]
 
 [node name="VictoryScreen" type="CanvasLayer" unique_id=1786491933 node_paths=PackedStringArray("button_restart")]
 process_mode = 2
 script = ExtResource("1_wdgif")
 button_restart = NodePath("MarginContainer/VBoxContainer/ButtonRestart")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1024523087]
-material = SubResource("ShaderMaterial_0myyo")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Vignette" parent="." unique_id=1431719666 instance=ExtResource("2_wdgif")]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1103711182]
 anchors_preset = 14

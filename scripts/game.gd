@@ -4,6 +4,7 @@ class_name Game extends Node
 const PLAYER = preload("uid://008kmsqhoftq")
 const EXPLOSION = preload("uid://bs4w2if84ps2x")
 const VICTORY_SCREEN = preload("uid://btdffvpcv8u3l")
+const DEFEAT_SCREEN = preload("uid://cwgfegkjdyvcy")
 
 @export var ship_anchor: Node2D
 @export var bullet_manager: BulletManager
@@ -53,6 +54,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if played_died and event.is_action_pressed("ui_accept"):
 		ui.toggle_message(false)
 		_spawn_player(true)
+		get_tree().root.set_input_as_handled()
 
 
 func _on_player_died(position: Vector2) -> void:
@@ -69,6 +71,9 @@ func _on_player_died(position: Vector2) -> void:
 		await get_tree().create_timer(1.0).timeout
 		ui.toggle_message(true)
 		played_died = true
+	else:
+		var defeat_screen: DefeatScreen = DEFEAT_SCREEN.instantiate() as DefeatScreen
+		add_child(defeat_screen)
 
 
 func _on_enemy_killed(points: int) -> void:

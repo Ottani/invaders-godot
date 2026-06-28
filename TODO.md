@@ -4,7 +4,7 @@
 
 - [x] Find a better font
 - [x] Victory Screen
-- [ ] Defeat Screen
+- [x] Defeat Screen
 - [ ] Pause Screen
 - [ ] Rocks
 - [ ] Destructible Rocks by bombs and bullets

@@ -8,6 +8,9 @@
 atlas = ExtResource("1_nt7q6")
 region = Rect2(16, 80, 16, 16)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdt2y"]
+bg_color = Color(0.23, 0.23, 0.23, 0.7882353)
+
 [node name="UI" type="CanvasLayer" unique_id=983623857 node_paths=PackedStringArray("continue_message", "lives_container", "score_label")]
 script = ExtResource("1_x4jx1")
 continue_message = NodePath("MarginContainer/ContinueMessage")
@@ -48,10 +51,12 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_0myyo")
 
 [node name="ContinueMessage" type="RichTextLabel" parent="MarginContainer" unique_id=1789404091]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_gdt2y")
 bbcode_enabled = true
 text = "Press [color=yellow][wave amp=15 freq=5]Spacebar[/wave][/color] to continue"
-fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
+vertical_alignment = 1
