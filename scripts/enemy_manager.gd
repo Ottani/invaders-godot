@@ -20,6 +20,7 @@ var qty_enemies: int = 0
 
 signal enemy_killed(points: int)
 signal all_enemies_killed
+signal enemy_invaded
 
 
 func _init() -> void:
@@ -69,7 +70,9 @@ func _physics_process(delta: float) -> void:
 		movement = Vector2(0, ENEMY_DOWNWARDS)
 	
 	for enemy in enemies:
-		enemy.position += movement
+		enemy.global_position += movement
+		if enemy.global_position.y > screen_size.y - 24.0:
+			enemy_invaded.emit()
 	
 	enemy_shoot_delay += delta
 	if enemy_shoot_delay > ENEMY_SHOOT_DELAY:

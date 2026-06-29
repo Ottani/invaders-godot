@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://gowy4o46fycn"]
+
+[ext_resource type="Texture2D" uid="uid://dneyhw0r0db2d" path="res://assets/sheet01.png" id="1_32ckd"]
+
+[node name="Impact" type="Sprite2D" unique_id=1873989391]
+texture = ExtResource("1_32ckd")
+region_enabled = true
+region_rect = Rect2(240, 16, 16, 16)

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c1w7prvvxytom" path="res://scripts/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://ca3wcvsoih4ta" path="res://scenes/bullet_manager.tscn" id="3_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://bdokbqg103jn8" path="res://scenes/rock_manager.tscn" id="4_p57ef"]
 [ext_resource type="PackedScene" uid="uid://dgi3fd33gqq6f" path="res://scenes/enemy_manager.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://b217btv0jfif" path="res://scenes/bomb_manager.tscn" id="5_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b0jem2xwiwq0x" path="res://scenes/ui.tscn" id="6_p57ef"]
@@ -19,6 +20,8 @@ position = Vector2(304, 320)
 [node name="BulletManager" parent="." unique_id=279609402 instance=ExtResource("3_lbhrr")]
 
 [node name="BombManager" parent="." unique_id=2063267193 instance=ExtResource("5_p57ef")]
+
+[node name="RockManager" parent="." unique_id=417244305 instance=ExtResource("4_p57ef")]
 
 [node name="EnemyManager" parent="." unique_id=1136709635 node_paths=PackedStringArray("bomb_manager") instance=ExtResource("5_iywne")]
 bomb_manager = NodePath("../BombManager")

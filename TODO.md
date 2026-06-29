@@ -6,10 +6,10 @@
 - [x] Victory Screen
 - [x] Defeat Screen
 - [x] Pause Screen
-- [ ] Rocks
+- [x] Rocks
 - [ ] Destructible Rocks by bombs and bullets
-- [ ] Destructible Rocks by enemy contact
-- [ ] Enemy reach bottom defeat
+- [x] Destructible Rocks by enemy contact
+- [x] Enemy reach bottom defeat
 - [ ] Main Menu Screen
 
 

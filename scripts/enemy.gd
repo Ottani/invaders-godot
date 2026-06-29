@@ -54,3 +54,8 @@ func take_damage(value: int) -> void:
 
 func get_bomb_position() -> Vector2:
 	return marker.global_position
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is Player:
+		(body as Player).take_damage(1)

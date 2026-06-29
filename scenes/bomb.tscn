@@ -44,7 +44,6 @@ radius = 2.0
 
 [node name="Bomb" type="Area2D" unique_id=91467737]
 collision_layer = 16
-collision_mask = 5
 script = ExtResource("1_vpdcx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1163995679]

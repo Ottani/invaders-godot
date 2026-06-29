@@ -30,7 +30,6 @@ size = Vector2(30, 28)
 
 [node name="Enemy" type="Area2D" unique_id=1299878929 node_paths=PackedStringArray("sprite", "marker")]
 collision_layer = 2
-collision_mask = 5
 script = ExtResource("1_md0e3")
 sprite = NodePath("AnimatedSprite2D")
 marker = NodePath("Marker2D")
@@ -46,3 +45,5 @@ shape = SubResource("RectangleShape2D_0myyo")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1910365755]
 position = Vector2(0, 15)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -17,7 +17,7 @@ const PAUSE_SCREEN = preload("uid://bmk823btowp5e")
 var played_died: bool = false
 var player_lives: int = 3
 var score: int = 0
-
+var handled_enemy_invasion: bool = false
 
 func _ready() -> void:
 	_spawn_player(false)
@@ -27,6 +27,8 @@ func _ready() -> void:
 	ui.set_score(score)
 	enemy_manager.enemy_killed.connect(_on_enemy_killed)
 	enemy_manager.all_enemies_killed.connect(_on_all_enemies_killed)
+	enemy_manager.enemy_invaded.connect(_on_enemy_invaded)
+	handled_enemy_invasion = false
 
 
 func _spawn_player(is_invincible: bool) -> void:
@@ -38,15 +40,6 @@ func _spawn_player(is_invincible: bool) -> void:
 		player.make_invincible()
 	enemy_manager.unfreeze_enemies()
 	played_died = false
-
-
-#func _input(event: InputEvent) -> void:
-	#var mouse_event := event as InputEventMouseButton
-	#if mouse_event and mouse_event.pressed and sprite:
-		#if mouse_event.button_index == MOUSE_BUTTON_LEFT:
-			#var local_mouse_pos: Vector2 = sprite.to_local(mouse_event.position)
-			#if sprite.get_rect().has_point(local_mouse_pos):
-				#change_scene.emit(Main.Scene.MAIN)
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -87,3 +80,11 @@ func _on_enemy_killed(points: int) -> void:
 func _on_all_enemies_killed() -> void:
 	var victory_screen: VictoryScreen = VICTORY_SCREEN.instantiate() as VictoryScreen
 	add_child(victory_screen)
+
+
+func _on_enemy_invaded() -> void:
+	if handled_enemy_invasion:
+		return
+	handled_enemy_invasion = true
+	var defeat_screen: DefeatScreen = DEFEAT_SCREEN.instantiate() as DefeatScreen
+	add_child(defeat_screen)

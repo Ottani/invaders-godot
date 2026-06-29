@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bdokbqg103jn8"]
+
+[ext_resource type="Script" uid="uid://fsp00oxs4qaq" path="res://scripts/rock_manager.gd" id="1_bj5dc"]
+
+[node name="RockManager" type="Node2D" unique_id=417244305]
+script = ExtResource("1_bj5dc")
