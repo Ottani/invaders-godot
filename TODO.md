@@ -7,16 +7,17 @@
 - [x] Defeat Screen
 - [x] Pause Screen
 - [x] Rocks
-- [ ] Destructible Rocks by bombs and bullets
+- [x] Destructible Rocks by bombs and bullets
 - [x] Destructible Rocks by enemy contact
 - [x] Enemy reach bottom defeat
 - [ ] Main Menu Screen
-
+- [ ] Sounds
 
 ### Nice to have
 
 - [ ] UFO
-
+- [ ] Options
+- [ ] Explosions VFX
 
 ### Power ups (optional)
 
