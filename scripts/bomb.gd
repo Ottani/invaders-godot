@@ -1,7 +1,7 @@
 class_name Bomb extends Area2D
 
-const MIN_SPEED: float = 50.0;
-const MAX_SPEED: float = 100.0;
+const MIN_SPEED: float = 50.0
+const MAX_SPEED: float = 100.0
 const DIRECTION: Vector2 = Vector2(0, 1)
 
 var speed: float
@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if body is Player:
-		(body as Player).take_damage(1)
-	queue_free()
+func _on_area_entered(area: Area2D) -> void:
+	if area is Player:
+		(area as Player).take_damage(1)
+		queue_free()

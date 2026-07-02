@@ -4,7 +4,6 @@ class_name PauseScreen extends CanvasLayer
 
 
 func _ready() -> void:
-	get_tree().paused = true
 	button_resume.grab_focus()
 
 

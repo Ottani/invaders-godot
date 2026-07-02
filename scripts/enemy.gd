@@ -11,7 +11,7 @@ enum EnemyType {
 @export var sprite: AnimatedSprite2D
 @export var marker: Marker2D
 
-signal destroyed(points: int)
+signal destroyed(points: int, enemy_instance: Enemy)
 
 var life: int
 var color: Color

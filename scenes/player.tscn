@@ -74,12 +74,13 @@ _data = {
 &"spawn_invincible": SubResource("Animation_qhqgy")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=1460996354 node_paths=PackedStringArray("ship", "marker_2d", "animation_player")]
+[node name="Player" type="Area2D" unique_id=160449578 node_paths=PackedStringArray("ship", "marker_2d", "animation_player", "audio_player")]
 collision_mask = 0
 script = ExtResource("1_g2els")
 ship = NodePath("Ship")
 marker_2d = NodePath("Marker2D")
 animation_player = NodePath("AnimationPlayer")
+audio_player = NodePath("")
 
 [node name="Ship" type="AnimatedSprite2D" parent="." unique_id=1010757930]
 sprite_frames = SubResource("SpriteFrames_0myyo")

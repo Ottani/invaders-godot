@@ -10,6 +10,7 @@ const PAUSE_SCREEN = preload("uid://bmk823btowp5e")
 @export var ship_anchor: Node2D
 @export var bullet_manager: BulletManager
 @export var enemy_manager: EnemyManager
+@export var bomb_manager: BombManager
 @export var ui: UI
 
 #signal change_scene
@@ -22,6 +23,7 @@ var handled_enemy_invasion: bool = false
 func _ready() -> void:
 	_spawn_player(false)
 	player_lives = 3
+	ui.initialize_lives(player_lives)
 	ui.set_lives(player_lives)
 	score = 0
 	ui.set_score(score)
@@ -34,7 +36,7 @@ func _ready() -> void:
 func _spawn_player(is_invincible: bool) -> void:
 	var player: Player = PLAYER.instantiate() as Player
 	player.ship_died.connect(_on_player_died)
-	player.bulletManager = bullet_manager
+	player.bullet_manager = bullet_manager
 	ship_anchor.add_child(player)
 	if is_invincible:
 		player.make_invincible()
@@ -44,8 +46,12 @@ func _spawn_player(is_invincible: bool) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
+		if has_node("PauseScreen"):
+			return
 		var pause_screen: PauseScreen = PAUSE_SCREEN.instantiate() as PauseScreen
+		pause_screen.name = "PauseScreen"
 		add_child(pause_screen)
+		get_tree().paused = true
 		get_tree().root.set_input_as_handled()
 	if played_died and event.is_action_pressed("ui_accept"):
 		ui.toggle_message(false)
@@ -55,6 +61,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func _on_player_died(position: Vector2) -> void:
 	enemy_manager.freeze_enemies()
+	bomb_manager.clear_all_bombs()
 	var explosion: AnimatedSprite2D = EXPLOSION.instantiate() as AnimatedSprite2D
 	explosion.global_position = position
 	add_child(explosion)

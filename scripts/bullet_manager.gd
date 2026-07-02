@@ -5,7 +5,7 @@ const MAX_BULLETS: int = 5
 
 
 func spawn_bullet(global_spawn_position: Vector2) -> void:
-	if get_child_count() > MAX_BULLETS:
+	if get_child_count() >= MAX_BULLETS:
 		return
 	
 	var bullet: Bullet = BULLET.instantiate() as Bullet

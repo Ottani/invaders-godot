@@ -5,6 +5,7 @@ var image: Image
 var sprite_offset: Vector2
 var image_size: Vector2i
 var dirty: bool = false
+var rock_texture: ImageTexture
 
 
 func _ready() -> void:
@@ -17,9 +18,9 @@ func _ready() -> void:
 	image.blit_rect(full_image, region, Vector2i.ZERO)
 	sprite_offset = Vector2(image.get_width() / 2.0, image.get_height() / 2.0)
 	image_size = Vector2(image.get_width(), image.get_height())
-	var new_texture: Texture2D = ImageTexture.create_from_image(image)
+	rock_texture = ImageTexture.create_from_image(image)
 	sprite.region_enabled = false
-	sprite.texture = new_texture
+	sprite.texture = rock_texture
 	dirty = false
 
 
@@ -30,7 +31,7 @@ func _physics_process(_delta: float) -> void:
 	for obj: Area2D in objs:
 		_process_projectile_hit(obj)
 	if dirty:
-		sprite.texture = ImageTexture.create_from_image(image)
+		rock_texture.update(image)
 		dirty = false
 
 

@@ -1,4 +1,4 @@
-extends Node2D
+class_name RockManager extends Node2D
 
 const ROCK = preload("uid://j76d83ibbc6j")
 const NUM_ROCKS: int = 5

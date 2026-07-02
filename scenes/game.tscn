@@ -7,11 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://b217btv0jfif" path="res://scenes/bomb_manager.tscn" id="5_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b0jem2xwiwq0x" path="res://scenes/ui.tscn" id="6_p57ef"]
 
-[node name="Game" type="Node" unique_id=949139678 node_paths=PackedStringArray("ship_anchor", "bullet_manager", "enemy_manager", "ui")]
+[node name="Game" type="Node" unique_id=949139678 node_paths=PackedStringArray("ship_anchor", "bullet_manager", "enemy_manager", "bomb_manager", "ui")]
 script = ExtResource("1_yqjtg")
 ship_anchor = NodePath("ShipAnchor")
 bullet_manager = NodePath("BulletManager")
 enemy_manager = NodePath("EnemyManager")
+bomb_manager = NodePath("BombManager")
 ui = NodePath("UI")
 
 [node name="ShipAnchor" type="Node2D" parent="." unique_id=173868248]

@@ -16,14 +16,16 @@ const MAX_SHOOTERS: int = 6
 var direction: float = 1.0
 var screen_size: Vector2
 var enemy_shoot_delay: float = 0.0
-var qty_enemies: int = 0
+
+var active_enemies: Array[Enemy] = []
 
 signal enemy_killed(points: int)
 signal all_enemies_killed
 signal enemy_invaded
 
 
-func _init() -> void:
+func _ready() -> void:
+	screen_size = get_viewport_rect().size
 	for y in ROWS:
 		var enemy_type: Enemy.EnemyType
 		match y:
@@ -36,26 +38,18 @@ func _init() -> void:
 			var enemy: Enemy = ENEMY.instantiate() as Enemy
 			enemy.enemy_type = enemy_type
 			enemy.position = enemy_position
-			enemy.destroyed.connect(_on_enemy_destroyed)
+			enemy.destroyed.connect(_on_enemy_destroyed.bind(enemy))
 			add_child(enemy)
-	qty_enemies = ROWS * COLS
-
-
-func _ready() -> void:
-	screen_size = get_viewport_rect().size
+			active_enemies.append(enemy)
 
 
 func _physics_process(delta: float) -> void:
-	var enemies: Array[Enemy]
-	enemies.assign(get_children()
-		.filter(func(c: Node) -> bool: return c is Enemy)
-		.map(func(e: Node) -> Enemy: return e as Enemy))
-	if enemies.is_empty():
+	if active_enemies.is_empty():
 		return
 	
 	var move_step: Vector2 = Vector2(direction * SPEED * delta, 0)
 	var switch_direction := false
-	for enemy in enemies:
+	for enemy in active_enemies:
 		var next_x: float = enemy.global_position.x + move_step.x
 		if direction > 0 and (next_x + HALF_WIDTH) >= screen_size.x:
 			switch_direction = true
@@ -69,34 +63,41 @@ func _physics_process(delta: float) -> void:
 		direction *= -1
 		movement = Vector2(0, ENEMY_DOWNWARDS)
 	
-	for enemy in enemies:
+	for enemy in active_enemies:
 		enemy.global_position += movement
 		if enemy.global_position.y > screen_size.y - 24.0:
 			enemy_invaded.emit()
+			break
 	
 	enemy_shoot_delay += delta
 	if enemy_shoot_delay > ENEMY_SHOOT_DELAY:
 		enemy_shoot_delay = 0.0
-		_shoot(enemies)
+		_shoot()
 
 
-func _shoot(enemies: Array[Enemy]) -> void:
-	if not bomb_manager:
+func _shoot() -> void:
+	if not bomb_manager or active_enemies.is_empty():
 		return
-	var size: int = enemies.size()
+	var size: int = active_enemies.size()
 	var min_shooters: int = mini(size, MIN_SHOOTERS)
 	var max_shooters: int = mini(size, MAX_SHOOTERS)
 	var qty_shooters: int = randi_range(min_shooters, max_shooters)
-	enemies.shuffle()
-	for i in range(qty_shooters):
-		var shooter: Enemy = enemies[i]
+	
+	var chosen_indices: Array[int] = []
+	while chosen_indices.size() < qty_shooters:
+		var rand_idx := randi() % size
+		if not rand_idx in chosen_indices:
+			chosen_indices.append(rand_idx)
+
+	for idx in chosen_indices:
+		var shooter: Enemy = active_enemies[idx]
 		bomb_manager.spawn_bomb(shooter.get_bomb_position())
+	
 
-
-func _on_enemy_destroyed(points: int) -> void:
-	qty_enemies -= 1
+func _on_enemy_destroyed(points: int, enemy_instance: Enemy) -> void:
+	active_enemies.erase(enemy_instance)
 	enemy_killed.emit(points)
-	if qty_enemies <= 0:
+	if active_enemies.is_empty():
 		all_enemies_killed.emit()
 
 

@@ -1,9 +1,10 @@
-class_name Player extends CharacterBody2D
+class_name Player extends Area2D
 
 @export var ship: AnimatedSprite2D
 @export var marker_2d: Marker2D
-@export var bulletManager: BulletManager
+@export var bullet_manager: BulletManager
 @export var animation_player: AnimationPlayer
+@export var audio_player: AudioStreamPlayer
 
 signal ship_died(position: Vector2)
 
@@ -39,8 +40,9 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_alive:
 		return
-	if bulletManager and event.is_action_pressed("shoot"):
-		bulletManager.spawn_bullet(marker_2d.global_position)
+	if bullet_manager and event.is_action_pressed("shoot"):
+		AudioManager.play_laser()
+		bullet_manager.spawn_bullet(marker_2d.global_position)
 
 
 func take_damage(_value: int) -> void:

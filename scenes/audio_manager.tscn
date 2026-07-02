@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c4mucmfe0axls"]
+
+[ext_resource type="Script" uid="uid://436lb737x2uk" path="res://scripts/audio_manager.gd" id="1_8qd8g"]
+[ext_resource type="AudioStream" uid="uid://dnvcti1m1wac" path="res://assets/laser1.wav" id="2_liach"]
+[ext_resource type="AudioStream" uid="uid://cimctqptx33f5" path="res://assets/explosion1.wav" id="3_3asnw"]
+
+[node name="AudioManager" type="Node" unique_id=1674219980 node_paths=PackedStringArray("laser_audio_player", "explosion_audio_player")]
+script = ExtResource("1_8qd8g")
+laser_audio_player = NodePath("LaserAudioPlayer")
+explosion_audio_player = NodePath("ExplosionAudioPlayer")
+
+[node name="LaserAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=320144564]
+stream = ExtResource("2_liach")
+pitch_scale = 1.5
+max_polyphony = 5
+
+[node name="ExplosionAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1092053308]
+stream = ExtResource("3_3asnw")
+max_polyphony = 5

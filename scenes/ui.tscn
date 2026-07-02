@@ -1,12 +1,7 @@
 [gd_scene format=3 uid="uid://b0jem2xwiwq0x"]
 
-[ext_resource type="Texture2D" uid="uid://dneyhw0r0db2d" path="res://assets/sheet01.png" id="1_nt7q6"]
 [ext_resource type="Script" uid="uid://dsh054nhjs8iq" path="res://scripts/ui.gd" id="1_x4jx1"]
 [ext_resource type="PackedScene" uid="uid://cqxrhclqdmc7m" path="res://scenes/life.tscn" id="2_yev5y"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0myyo"]
-atlas = ExtResource("1_nt7q6")
-region = Rect2(16, 80, 16, 16)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdt2y"]
 bg_color = Color(0.23, 0.23, 0.23, 0.7882353)
@@ -45,10 +40,6 @@ size_flags_vertical = 4
 
 [node name="Life" parent="MarginContainer/HBoxContainer/LivesContainer" unique_id=2043129759 instance=ExtResource("2_yev5y")]
 layout_mode = 2
-
-[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer/LivesContainer" unique_id=1732335467]
-layout_mode = 2
-texture = SubResource("AtlasTexture_0myyo")
 
 [node name="ContinueMessage" type="RichTextLabel" parent="MarginContainer" unique_id=1789404091]
 custom_minimum_size = Vector2(0, 20)
