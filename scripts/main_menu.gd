@@ -7,6 +7,7 @@ class_name MainMenu extends CanvasLayer
 func _ready() -> void:
 	button_play.pressed.connect(_on_button_play_pressed)
 	button_quit.pressed.connect(_on_button_quit_pressed)
+	button_play.grab_focus()
 
 
 func _on_button_play_pressed() -> void:

@@ -37,14 +37,16 @@ func _physics_process(_delta: float) -> void:
 
 func _process_projectile_hit(area: Area2D) -> void:
 	if area is Enemy:
-		queue_free()
+		_process_enemy_hit(area as Enemy)
 	elif area is Bomb or area is Bullet:
 		var size: Vector2
 		var is_bomb: bool = area is Bomb
 		if is_bomb:
 			size = Vector2(2.0, 2.0)
-		else:
+		elif area is Bullet:
 			size = Vector2(6.0, 4.0)
+		else:
+			size = Vector2(32.0, 32.0)
 		var local_pos: Vector2 = to_local(area.global_position) + sprite_offset
 		var start_x: int = clampi(int(local_pos.x - size.x), 0, image_size.x)
 		var end_x: int = clampi(int(local_pos.x + size.x), 0, image_size.x)
@@ -78,3 +80,7 @@ func _carve_hole(origin: Vector2, radius: float) -> void:
 				if origin.distance_squared_to(Vector2(x, y)) <= radius_sq:
 					image.set_pixel(x, y, Color.TRANSPARENT)
 	dirty = true
+
+
+func _process_enemy_hit(enemy: Enemy) -> void:
+	pass
