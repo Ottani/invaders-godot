@@ -1,9 +1,40 @@
 [gd_scene format=3 uid="uid://dardoh3gque3p"]
 
 [ext_resource type="Script" uid="uid://5tdk68bdse5l" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://dneyhw0r0db2d" path="res://assets/sheet01.png" id="2_ekxnf"]
 
-[node name="MainMenu" type="CanvasLayer" unique_id=1600526339]
+[sub_resource type="Gradient" id="Gradient_bqqt6"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.9960465)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0.22352941, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0myyo"]
+gradient = SubResource("Gradient_bqqt6")
+fill_to = Vector2(0.2759916, 0.7497162)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0myyo"]
+atlas = ExtResource("2_ekxnf")
+region = Rect2(0, 0, 32, 32)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15q0l"]
+atlas = ExtResource("2_ekxnf")
+region = Rect2(0, 96, 32, 32)
+filter_clip = true
+
+[node name="MainMenu" type="CanvasLayer" unique_id=1600526339 node_paths=PackedStringArray("button_play", "button_quit")]
+process_mode = 3
 script = ExtResource("1_l6cm7")
+button_play = NodePath("MarginContainer/PanelContainer/VBoxContainer/ButtonPlay")
+button_quit = NodePath("MarginContainer/PanelContainer/VBoxContainer/ButtonQuit")
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=1765591420]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_0myyo")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1137804334]
 anchors_preset = 15
@@ -11,6 +42,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=1088831066]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+bbcode_enabled = true
+text = "[color=orange]Paulo Assis - 2026[/color]"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=165565528]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 24
+text = "Invaders!"
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=202701231]
 layout_mode = 2
@@ -20,22 +73,24 @@ size_flags_vertical = 4
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer" unique_id=1017257393]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=165565528]
-layout_mode = 2
-theme_type_variation = &"HeaderLarge"
-text = "Invaders!"
-
 [node name="ButtonPlay" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1733478429]
 layout_mode = 2
 text = "Play"
-
-[node name="ButtonOptions" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1002345458]
-layout_mode = 2
-text = "Options"
 
 [node name="ButtonQuit" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1626185360]
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="MarginContainer/PanelContainer/VBoxContainer/ButtonPlay" to="." method="_on_button_play_pressed"]
-[connection signal="pressed" from="MarginContainer/PanelContainer/VBoxContainer/ButtonQuit" to="." method="_on_button_quit_pressed"]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=604252643]
+offset_left = 59.0
+offset_top = 172.0
+offset_right = 210.0
+offset_bottom = 323.0
+texture = SubResource("AtlasTexture_0myyo")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=2082974308]
+offset_left = 68.0
+offset_top = 24.0
+offset_right = 205.0
+offset_bottom = 161.0
+texture = SubResource("AtlasTexture_15q0l")

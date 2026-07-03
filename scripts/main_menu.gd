@@ -1,11 +1,17 @@
 class_name MainMenu extends CanvasLayer
 
-signal change_scene
+@export var button_play: Button
+@export var button_quit: Button
+
+
+func _ready() -> void:
+	button_play.pressed.connect(_on_button_play_pressed)
+	button_quit.pressed.connect(_on_button_quit_pressed)
+
+
+func _on_button_play_pressed() -> void:
+	SceneManager.change_scene_to_game()
 
 
 func _on_button_quit_pressed() -> void:
 	get_tree().quit()
-
-
-func _on_button_play_pressed() -> void:
-	change_scene.emit(Main.Scene.GAME)

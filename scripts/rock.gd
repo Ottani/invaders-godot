@@ -62,6 +62,7 @@ func _process_projectile_hit(area: Area2D) -> void:
 				break
 
 		if actual_hit:
+			AudioManager.bomb_audio_player.play();
 			_carve_hole(local_pos, 8.0)
 			area.queue_free()
 

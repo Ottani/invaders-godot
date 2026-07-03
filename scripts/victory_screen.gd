@@ -4,14 +4,14 @@ class_name VictoryScreen extends CanvasLayer
 
 
 func _ready() -> void:
+	AudioManager.pause_music(true)
 	get_tree().paused = true
 	button_restart.grab_focus()
 
 
 func _on_button_quit_pressed() -> void:
-	get_tree().quit()
+	SceneManager.change_scene_to_menu()
 
 
 func _on_button_restart_pressed() -> void:
-	get_tree().paused = false
-	get_tree().reload_current_scene()
+	SceneManager.restart_game()

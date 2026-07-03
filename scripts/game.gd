@@ -13,7 +13,6 @@ const PAUSE_SCREEN = preload("uid://bmk823btowp5e")
 @export var bomb_manager: BombManager
 @export var ui: UI
 
-#signal change_scene
 
 var played_died: bool = false
 var player_lives: int = 3
@@ -31,6 +30,7 @@ func _ready() -> void:
 	enemy_manager.all_enemies_killed.connect(_on_all_enemies_killed)
 	enemy_manager.enemy_invaded.connect(_on_enemy_invaded)
 	handled_enemy_invasion = false
+	AudioManager.play_music()
 
 
 func _spawn_player(is_invincible: bool) -> void:
@@ -44,7 +44,7 @@ func _spawn_player(is_invincible: bool) -> void:
 	played_died = false
 
 
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		if has_node("PauseScreen"):
 			return

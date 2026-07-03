@@ -10,8 +10,8 @@
 - [x] Destructible Rocks by bombs and bullets
 - [x] Destructible Rocks by enemy contact
 - [x] Enemy reach bottom defeat
-- [ ] Main Menu Screen
-- [ ] Sounds
+- [X] Main Menu Screen
+- [X] Sounds
 
 ### Nice to have
 

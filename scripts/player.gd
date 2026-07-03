@@ -48,6 +48,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func take_damage(_value: int) -> void:
 	if not is_alive or is_invincible:
 		return
+	AudioManager.play_ship_explosion()
 	is_alive = false
 	ship_died.emit(global_position)
 	queue_free()
