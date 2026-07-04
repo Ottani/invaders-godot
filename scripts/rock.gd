@@ -1,6 +1,9 @@
 class_name Rock extends Area2D
 
 @export var sprite: Sprite2D
+@export var enemy_brush: Brush
+@export var bomb_brush: Brush
+
 var image: Image
 var sprite_offset: Vector2
 var image_size: Vector2i
@@ -14,10 +17,10 @@ func _ready() -> void:
 	var full_image: Image = texture.get_image()
 	if full_image.is_compressed():
 		full_image.decompress()
-	image = Image.create(region.size.x , region.size.y, false, full_image.get_format())
+	image = Image.create_empty(region.size.x , region.size.y, false, full_image.get_format())
 	image.blit_rect(full_image, region, Vector2i.ZERO)
 	sprite_offset = Vector2(image.get_width() / 2.0, image.get_height() / 2.0)
-	image_size = Vector2(image.get_width(), image.get_height())
+	image_size = image.get_size()
 	rock_texture = ImageTexture.create_from_image(image)
 	sprite.region_enabled = false
 	sprite.texture = rock_texture
@@ -33,12 +36,17 @@ func _physics_process(_delta: float) -> void:
 	if dirty:
 		rock_texture.update(image)
 		dirty = false
+		var used_rect: Rect2i = image.get_used_rect()
+		if used_rect.size.x < 8 or used_rect.size.y < 8:
+			queue_free()
 
 
 func _process_projectile_hit(area: Area2D) -> void:
 	if area is Enemy:
 		_process_enemy_hit(area as Enemy)
-	elif area is Bomb or area is Bullet:
+		return
+	
+	if area is Bomb or area is Bullet:
 		var size: Vector2
 		var is_bomb: bool = area is Bomb
 		if is_bomb:
@@ -65,22 +73,18 @@ func _process_projectile_hit(area: Area2D) -> void:
 
 		if actual_hit:
 			AudioManager.bomb_audio_player.play();
-			_carve_hole(local_pos, 8.0)
+			_carve_hole(local_pos)
 			area.queue_free()
 
 
-func _carve_hole(origin: Vector2, radius: float) -> void:
-	var start_x: int = clampi(int(origin.x - radius), 0, image_size.x)
-	var end_x: int = clampi(int(origin.x + radius), 0, image_size.x)
-	var start_y: int = clampi(int(origin.y - radius), 0, image_size.y)
-	var end_y: int = clampi(int(origin.y + radius), 0, image_size.y)
-	var radius_sq: float = radius * radius
-	for y in range(start_y, end_y):
-			for x in range(start_x, end_x):
-				if origin.distance_squared_to(Vector2(x, y)) <= radius_sq:
-					image.set_pixel(x, y, Color.TRANSPARENT)
+func _carve_hole(origin: Vector2) -> void:
+	var paste_target := Vector2i(origin - bomb_brush.half_size)
+	bomb_brush.apply(image, paste_target)
 	dirty = true
 
 
 func _process_enemy_hit(enemy: Enemy) -> void:
-	pass
+	var local_pos: Vector2 = to_local(enemy.global_position)
+	var paste_target := Vector2i(local_pos + sprite_offset - enemy_brush.half_size)
+	enemy_brush.apply(image, paste_target)
+	dirty = true
