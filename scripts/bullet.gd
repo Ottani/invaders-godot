@@ -3,7 +3,6 @@ class_name Bullet extends Area2D
 const INITIAL_SPEED: float = 100.0
 const ACCEL: float = 75.0
 
-@export var audio_player: AudioStreamPlayer
 var speed: float = 0.0
 
 

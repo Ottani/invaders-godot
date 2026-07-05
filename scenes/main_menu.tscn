@@ -23,11 +23,12 @@ atlas = ExtResource("2_ekxnf")
 region = Rect2(0, 96, 32, 32)
 filter_clip = true
 
-[node name="MainMenu" type="CanvasLayer" unique_id=1600526339 node_paths=PackedStringArray("button_play", "button_quit")]
+[node name="MainMenu" type="CanvasLayer" unique_id=1600526339 node_paths=PackedStringArray("button_play", "button_quit", "button_fullscreen")]
 process_mode = 3
 script = ExtResource("1_l6cm7")
 button_play = NodePath("MarginContainer/PanelContainer/VBoxContainer/ButtonPlay")
 button_quit = NodePath("MarginContainer/PanelContainer/VBoxContainer/ButtonQuit")
+button_fullscreen = NodePath("MarginContainer/PanelContainer/VBoxContainer/ButtonFullscreen")
 
 [node name="TextureRect3" type="TextureRect" parent="." unique_id=1765591420]
 anchors_preset = 15
@@ -78,6 +79,10 @@ layout_mode = 2
 [node name="ButtonPlay" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1733478429]
 layout_mode = 2
 text = "Play"
+
+[node name="ButtonFullscreen" type="CheckButton" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=498702237]
+layout_mode = 2
+text = "Fullscreen"
 
 [node name="ButtonQuit" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1626185360]
 layout_mode = 2
