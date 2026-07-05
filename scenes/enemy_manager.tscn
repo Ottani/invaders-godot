@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dgi3fd33gqq6f"]
 
 [ext_resource type="Script" uid="uid://bver2mqmm4jdb" path="res://scripts/enemy_manager.gd" id="1_sqyd6"]
+[ext_resource type="PackedScene" uid="uid://c8omdon0uky07" path="res://scenes/explosion_particles.tscn" id="2_i6mmg"]
 
 [node name="EnemyManager" type="Node2D" unique_id=1136709635]
 script = ExtResource("1_sqyd6")
+explosion_particles = ExtResource("2_i6mmg")

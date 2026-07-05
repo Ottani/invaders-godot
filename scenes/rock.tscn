@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dneyhw0r0db2d" path="res://assets/sheet01.png" id="1_1di36"]
 [ext_resource type="Script" uid="uid://dvqu6q5y4qqfc" path="res://scripts/rock.gd" id="1_mek2u"]
 [ext_resource type="Script" uid="uid://dhy0ob8u2eptm" path="res://scripts/brush.gd" id="3_ik6fu"]
+[ext_resource type="PackedScene" uid="uid://c8omdon0uky07" path="res://scenes/explosion_particles.tscn" id="4_872ht"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ik6fu"]
 atlas = ExtResource("1_1di36")
@@ -32,6 +33,7 @@ script = ExtResource("1_mek2u")
 sprite = NodePath("Sprite2D")
 enemy_brush = SubResource("Resource_mek2u")
 bomb_brush = SubResource("Resource_ik6fu")
+explosion_particles = ExtResource("4_872ht")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1042159720]
 texture = ExtResource("1_1di36")

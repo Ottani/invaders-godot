@@ -2,6 +2,7 @@ class_name EnemyManager extends Node2D
 
 const ENEMY = preload("uid://bnisi3kxdkoau")
 @export var bomb_manager: BombManager
+@export var explosion_particles: PackedScene
 
 const COLS: int = 10
 const ROWS: int = 5
@@ -39,6 +40,7 @@ func _ready() -> void:
 			enemy.enemy_type = enemy_type
 			enemy.position = enemy_position
 			enemy.destroyed.connect(_on_enemy_destroyed.bind(enemy))
+			enemy.enemy_hit.connect(_on_enemy_hit)
 			add_child(enemy)
 			active_enemies.append(enemy)
 
@@ -65,9 +67,9 @@ func _physics_process(delta: float) -> void:
 	
 	for enemy in active_enemies:
 		enemy.global_position += movement
-		if enemy.global_position.y > screen_size.y - 24.0:
+		if enemy.global_position.y > screen_size.y - 48.0:
 			enemy_invaded.emit()
-			break
+
 	
 	enemy_shoot_delay += delta
 	if enemy_shoot_delay > ENEMY_SHOOT_DELAY:
@@ -99,6 +101,12 @@ func _on_enemy_destroyed(points: int, enemy_instance: Enemy) -> void:
 	enemy_killed.emit(points)
 	if active_enemies.is_empty():
 		all_enemies_killed.emit()
+
+
+func _on_enemy_hit(pos: Vector2) -> void:
+	var vfx: GPUParticles2D = explosion_particles.instantiate() as GPUParticles2D
+	add_child(vfx)
+	vfx.global_position = pos
 
 
 func freeze_enemies() -> void:

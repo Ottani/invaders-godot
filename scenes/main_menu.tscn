@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://5tdk68bdse5l" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Texture2D" uid="uid://dneyhw0r0db2d" path="res://assets/sheet01.png" id="2_ekxnf"]
+[ext_resource type="PackedScene" uid="uid://c8omdon0uky07" path="res://scenes/explosion_particles.tscn" id="3_bqqt6"]
 
 [sub_resource type="Gradient" id="Gradient_bqqt6"]
 interpolation_mode = 2
@@ -95,3 +96,6 @@ offset_top = 24.0
 offset_right = 205.0
 offset_bottom = 161.0
 texture = SubResource("AtlasTexture_15q0l")
+
+[node name="ExplosionParticles" parent="." unique_id=355786295 instance=ExtResource("3_bqqt6")]
+position = Vector2(134, 149)

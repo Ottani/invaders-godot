@@ -11,8 +11,8 @@ var screen_size: Vector2
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	var start_pos: Vector2 = Vector2(
-			(screen_size.x - (NUM_ROCKS * ROCK_SIZE) - (NUM_ROCKS - 1.0) * ROCK_GAP)
-				/ 2.0,
+			((screen_size.x - (NUM_ROCKS * ROCK_SIZE) - (NUM_ROCKS - 1) * ROCK_GAP)
+				/ 2.0) + ROCK_SIZE / 2.0,
 			ROCKS_Y,
 		)
 	for i in NUM_ROCKS:

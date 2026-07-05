@@ -7,6 +7,20 @@
 [ext_resource type="PackedScene" uid="uid://b217btv0jfif" path="res://scenes/bomb_manager.tscn" id="5_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b0jem2xwiwq0x" path="res://scenes/ui.tscn" id="6_p57ef"]
 
+[sub_resource type="Curve" id="Curve_p6fy5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.74853516, 0.20929027), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_15q0l"]
+curve = SubResource("Curve_p6fy5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0myyo"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(320, 180, 1)
+gravity = Vector3(0, 10, 0)
+alpha_curve = SubResource("CurveTexture_15q0l")
+
 [node name="Game" type="Node" unique_id=949139678 node_paths=PackedStringArray("ship_anchor", "bullet_manager", "enemy_manager", "bomb_manager", "ui")]
 script = ExtResource("1_yqjtg")
 ship_anchor = NodePath("ShipAnchor")
@@ -14,6 +28,20 @@ bullet_manager = NodePath("BulletManager")
 enemy_manager = NodePath("EnemyManager")
 bomb_manager = NodePath("BombManager")
 ui = NodePath("UI")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1900817314]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.0627451, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1245879047]
+position = Vector2(320, 180)
+amount = 100
+preprocess = 5.0
+process_material = SubResource("ParticleProcessMaterial_0myyo")
 
 [node name="ShipAnchor" type="Node2D" parent="." unique_id=173868248]
 position = Vector2(304, 320)

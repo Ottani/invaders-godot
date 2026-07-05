@@ -3,6 +3,7 @@ class_name Rock extends Area2D
 @export var sprite: Sprite2D
 @export var enemy_brush: Brush
 @export var bomb_brush: Brush
+@export var explosion_particles: PackedScene
 
 var image: Image
 var sprite_offset: Vector2
@@ -73,6 +74,9 @@ func _process_projectile_hit(area: Area2D) -> void:
 
 		if actual_hit:
 			AudioManager.bomb_audio_player.play();
+			var vfx: GPUParticles2D = explosion_particles.instantiate() as GPUParticles2D
+			add_child(vfx)
+			vfx.global_position = area.global_position
 			_carve_hole(local_pos)
 			area.queue_free()
 

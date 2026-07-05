@@ -11,6 +11,7 @@ func _ready() -> void:
 
 
 func _on_button_play_pressed() -> void:
+	get_tree().paused = false
 	SceneManager.change_scene_to_game()
 
 

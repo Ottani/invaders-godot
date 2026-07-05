@@ -45,5 +45,3 @@ shape = SubResource("RectangleShape2D_0myyo")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1910365755]
 position = Vector2(0, 15)
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

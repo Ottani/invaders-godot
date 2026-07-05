@@ -12,6 +12,7 @@ enum EnemyType {
 @export var marker: Marker2D
 
 signal destroyed(points: int, enemy_instance: Enemy)
+signal enemy_hit(pos: Vector2)
 
 var life: int
 var color: Color
@@ -20,6 +21,7 @@ var hit_tween: Tween
 
 
 func _ready() -> void:
+	area_entered.connect(_on_area_entered)
 	match enemy_type:
 		EnemyType.Weak:
 			life = 1
@@ -37,8 +39,9 @@ func _ready() -> void:
 	points = life * 10
 
 
-func take_damage(value: int) -> void:
+func take_damage(pos: Vector2, value: int) -> void:
 	life -= value
+	enemy_hit.emit(pos)
 	if life <= 0:
 		destroyed.emit(points)
 		queue_free()
@@ -56,6 +59,6 @@ func get_bomb_position() -> Vector2:
 	return marker.global_position
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if body is Player:
-		(body as Player).take_damage(1)
+func _on_area_entered(area: Area2D) -> void:
+	if area is Player:
+		(area as Player).take_damage(1)
